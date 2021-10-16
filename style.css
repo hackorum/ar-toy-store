@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+
+button {
+  width: 150px;
+  margin-right: 9;
+}
+
+#button-div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  z-index: 1;
+}
