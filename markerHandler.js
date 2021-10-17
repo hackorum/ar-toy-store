@@ -35,4 +35,11 @@ AFRAME.registerComponent("marker-handler", {
     let bdiv = document.getElementById("button-div");
     bdiv.style.display = "none";
   },
+  getoys: async function () {
+    return await firebase
+      .firestore()
+      .collection("toys")
+      .get()
+      .then((snap) => snap.docs.map((doc) => doc.data()));
+  },
 });

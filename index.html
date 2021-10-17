@@ -10,9 +10,23 @@
     />
     <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBtfWd8UELowVB8qBS2WZPgJ177CSnB68E",
+        authDomain: "ar-toy-store-35838.firebaseapp.com",
+        projectId: "ar-toy-store-35838",
+        storageBucket: "ar-toy-store-35838.appspot.com",
+        messagingSenderId: "249503998389",
+        appId: "1:249503998389:web:93d81617b9384f878c39fc",
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
     <link href="./style.css" rel="stylesheet" />
     <script src="./addButtons.js"></script>
     <script src="./markerHandler.js"></script>
+    <script src="./addMarkers.js"></script>
   </head>
   <body>
     <a-scene
@@ -25,6 +39,7 @@
       debugUIEnabled: false;"
       gesture-detector
       create-buttons
+      add-markers
     >
       <a-assets>
         <a-asset-item
@@ -33,33 +48,33 @@
         ></a-asset-item>
       </a-assets>
       <a-entity camera></a-entity>
-      <a-marker
-        id="car-marker"
-        type="pattern"
-        url="./assets/pattern-marker.patt"
-        cursor="rayOrigin: mouse"
-        marker-handler
-      >
-        <a-plane width="3" height="1.5" rotation="-90 0 0">
-          <a-plane position="0 0.9 0.02" height="0.3" width="3" color="#282c34">
-            <a-entity
-              position="0 0 0.01"
-              text="font:monoid;value:Hummer H2;width:2.8;height:1.5;align:center"
-            ></a-entity>
-          </a-plane>
-          <a-entity
-            position="0 0 0.01"
-            text="font:monoid;value:hello peter. you need to buy this toy right now because i spent so long trying to find a nice gltf model that is free on sketchfab and then i also coded this ar app for you. so just click on the order now button right now;width:2.8;height:1.5;align:center;color: #282c34"
-          ></a-entity>
-        </a-plane>
-        <a-entity
-          gltf-model="#car"
-          position="-3 0 0"
-          rotation="-90 -270 -90"
-          scale="0.5 0.5 0.5"
-          animation="property: rotation; to: 270 -270 -90; dur: 5000; loop: true; easing: linear"
-        ></a-entity>
-      </a-marker>
+      <!-- <a-marker -->
+      <!--   id="car-marker" -->
+      <!--   type="pattern" -->
+      <!--   url="./assets/pattern-marker.patt" -->
+      <!--   cursor="rayOrigin: mouse" -->
+      <!--   marker-handler -->
+      <!-- > -->
+      <!--   <a-plane width="3" height="1.5" rotation="-90 0 0"> -->
+      <!--     <a-plane position="0 0.9 0.02" height="0.3" width="3" color="#282c34"> -->
+      <!--       <a-entity -->
+      <!--         position="0 0 0.01" -->
+      <!--         text="font:monoid;value:Hummer H2;width:2.8;height:1.5;align:center" -->
+      <!--       ></a-entity> -->
+      <!--     </a-plane> -->
+      <!--     <a-entity -->
+      <!--       position="0 0 0.01" -->
+      <!--       text="font:monoid;value:hello peter. you need to buy this toy right now because i spent so long trying to find a nice gltf model that is free on sketchfab and then i also coded this ar app for you. so just click on the order now button right now;width:2.8;height:1.5;align:center;color: #282c34" -->
+      <!--     ></a-entity> -->
+      <!--   </a-plane> -->
+      <!--   <a-entity -->
+      <!--     gltf-model="#car" -->
+      <!--     position="-3 0 0" -->
+      <!--     rotation="-90 -270 -90" -->
+      <!--     scale="0.5 0.5 0.5" -->
+      <!--     animation="property: rotation; to: 270 -270 -90; dur: 5000; loop: true; easing: linear" -->
+      <!--   ></a-entity> -->
+      <!-- </a-marker> -->
     </a-scene>
     <div id="button-div"></div>
   </body>
