@@ -31,6 +31,7 @@ AFRAME.registerComponent("marker-handler", {
       let orderButton = document.getElementById("order-button");
       let summaryButton = document.getElementById("summary-button");
       let payButton = document.getElementById("pay-button");
+      let ratingButton = document.getElementById("rating-button");
       orderButton.addEventListener("click", () => {
         firebase
           .firestore()
@@ -39,7 +40,6 @@ AFRAME.registerComponent("marker-handler", {
           .get()
           .then((doc) => {
             let details = doc.data();
-            console.log(details);
             if (details["current_orders"][toy.id]) {
               details["current_orders"][toy.id]["quantity"] += 1;
               let currentQuantity =
@@ -71,6 +71,9 @@ AFRAME.registerComponent("marker-handler", {
       });
       summaryButton.addEventListener("click", () => {
         this.handleOrderSummary();
+      });
+      ratingButton.addEventListener("click", () => {
+        this.handleRating(toy);
       });
       payButton.addEventListener("click", () => this.handlePayment());
     } else {
@@ -162,5 +165,45 @@ AFRAME.registerComponent("marker-handler", {
           buttons: false,
         });
       });
+  },
+  handleRating: async function (toy) {
+    var orderSummary = await this.getOrderSummary(uid);
+    var currentOrders = Object.keys(orderSummary.current_orders);
+    if (currentOrders.length > 0 && currentOrders == toy.id) {
+      document.getElementById("rating-modal-div").style.display = "flex";
+      document.getElementById("rating-input").value = 0;
+      document.getElementById("feedback-input").value = "";
+      var saveRatingButton = document.getElementById("save-rating-button");
+      saveRatingButton.addEventListener("click", () => {
+        document.getElementById("rating-modal-div").style.display = "none";
+        var rating = document.getElementById("rating-input").value;
+        var feedback = document.getElementById("feedback-input").value;
+        firebase
+          .firestore()
+          .collection("toys")
+          .doc(toy.id)
+          .update({
+            last_rating: rating,
+            last_review: feedback,
+          })
+          .then(() => {
+            swal({
+              title: "thanks for rating",
+              text: "we hope you liked the toy",
+              icon: "success",
+              time: 2500,
+              buttons: false,
+            });
+          });
+      });
+    } else {
+      swal({
+        title: "Oops",
+        text: "we could not find the toy",
+        icon: "error",
+        time: 2500,
+        buttons: false,
+      });
+    }
   },
 });

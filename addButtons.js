@@ -12,15 +12,15 @@ AFRAME.registerComponent("create-buttons", {
     button2.setAttribute("id", "order-button");
     button2.setAttribute("class", "btn btn-warning");
 
-    // var button3 = document.createElement("button");
-    // button3.innerHTML = "SUMMARY";
-    // button3.setAttribute("id", "order-summary-button");
-    // button3.setAttribute("class", "btn btn-warning mr-3");
+    var button3 = document.createElement("button");
+    button3.innerHTML = "RATE US";
+    button3.setAttribute("id", "rating-button");
+    button3.setAttribute("class", "btn btn-warning mr-3");
 
     // 2. Append somewhere
     var buttonDiv = document.getElementById("button-div");
     buttonDiv.appendChild(button1);
     buttonDiv.appendChild(button2);
-    // buttonDiv.appendChild(button3);
+    buttonDiv.appendChild(button3);
   },
 });

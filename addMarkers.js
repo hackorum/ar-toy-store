@@ -129,6 +129,57 @@ AFRAME.registerComponent("add-markers", {
           value: `AVAILABLE : ${!toy.is_out_of_stock ? "YES" : "NO"}`,
         });
         mainPlane.appendChild(available);
+        var ratingPlane = document.createElement("a-entity");
+        ratingPlane.setAttribute("id", `rating-plane-${toy.id}`);
+        ratingPlane.setAttribute("position", { x: 3, y: 0, z: 0.5 });
+        ratingPlane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
+        ratingPlane.setAttribute("geometry", {
+          primitive: "plane",
+          width: 1.5,
+          height: 0.3,
+        });
+        ratingPlane.setAttribute("material", { color: "yellow" });
+
+        var rating = document.createElement("a-entity");
+        rating.setAttribute("id", `rating-${toy.id}`);
+        rating.setAttribute("position", { x: 0, y: 0.05, z: 0.1 });
+        rating.setAttribute("text", {
+          font: "mozillavr",
+          color: "black",
+          width: 2.4,
+          align: "center",
+          value: `Customer Rating: ${toy.last_rating}`,
+        });
+        rating.setAttribute("material", { color: "yellow" });
+
+        ratingPlane.appendChild(rating);
+        marker.appendChild(ratingPlane);
+
+        var reviewPlane = document.createElement("a-entity");
+        reviewPlane.setAttribute("id", `review-plane-${toy.id}`);
+        reviewPlane.setAttribute("position", { x: 2.4, y: 0, z: 0 });
+        reviewPlane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
+        reviewPlane.setAttribute("geometry", {
+          primitive: "plane",
+          width: 2.7,
+          height: 0.5,
+        });
+        reviewPlane.setAttribute("material", { color: "yellow" });
+
+        var review = document.createElement("a-entity");
+        review.setAttribute("id", `review-${toy.id}`);
+        review.setAttribute("position", { x: 0, y: 0.05, z: 0.1 });
+        review.setAttribute("text", {
+          font: "mozillavr",
+          color: "black",
+          width: 2.4,
+          align: "center",
+          value: `Customer Review: ${toy.last_review}`,
+        });
+        review.setAttribute("material", { color: "yellow" });
+
+        reviewPlane.appendChild(review);
+        marker.appendChild(reviewPlane);
       }
     });
   },
